@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:smart_home/common/common_color.dart';
 import 'package:smart_home/features/home/homescreen.dart';
@@ -21,8 +22,8 @@ class _NavigationState extends State<Navigation> {
   ];
   List<Widget> pages = [
     const HomeScreenView(),
-    const Center(
-      child: Text("Center"),
+     Center(
+      child: Text("Electricity Graph",style: GoogleFonts.aBeeZee(fontSize: 30,fontWeight: FontWeight.bold),),
     ),
     const Center(
       child: Text("Center"),
@@ -43,7 +44,7 @@ class _NavigationState extends State<Navigation> {
             splashColor: Colors.lightBlueAccent,
             hoverColor: Colors.blue,
             backgroundColor: Colors.lightBlue,
-            shape: CircleBorder(side: BorderSide(color: Colors.teal)),
+            shape: const CircleBorder(side: BorderSide(color: Colors.teal)),
             onPressed: () {},
             child: const Icon(
               Iconsax.microphone,

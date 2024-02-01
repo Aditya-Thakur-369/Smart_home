@@ -25,7 +25,7 @@ final router = GoRouter(routes: [
     path: Routes.homescreen.path,
     name: Routes.homescreen.name,
     pageBuilder: (context, state) {
-      return  CupertinoPage(child: HomeScreenView());
+      return  const CupertinoPage(child: HomeScreenView());
     },
   ),
 ]);

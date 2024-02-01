@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:smart_home/features/datails/widgets/fade_animation.dart';
 
 Widget topbar() {
   return Padding(
@@ -7,9 +8,12 @@ Widget topbar() {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Icon(
-          Iconsax.menu,
-          size: 30,
+        const RotateFadeAnimation(
+          delay: 2,
+          child: Icon(
+            Iconsax.menu,
+            size: 30,
+          ),
         ),
         Container(
           height: 55,

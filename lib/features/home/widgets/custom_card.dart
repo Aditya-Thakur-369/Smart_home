@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smart_home/common/common_color.dart';
+import 'package:smart_home/features/datails/widgets/fade_animation.dart';
 import 'package:smart_home/features/home/model/model.dart';
 
 class CustomCardView extends StatefulWidget {
@@ -45,19 +46,38 @@ class _CustomCardViewState extends State<CustomCardView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  height: 50,
-                  width: 50,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color:
-                          widget.flag ? Colors.white : const Color(0xFF1E1B29)),
-                  child: Icon(
-                    widget.model.icon,
-                    size: 28,
-                    color: widget.flag ? Colors.black : Colors.white,
-                  ),
-                ),
+                widget.flag
+                    ? RotateFadeAnimation(
+                        delay: 2,
+                        child: Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: widget.flag
+                                  ? Colors.white
+                                  : const Color(0xFF1E1B29)),
+                          child: Icon(
+                            widget.model.icon,
+                            size: 28,
+                            color: widget.flag ? Colors.black : Colors.white,
+                          ),
+                        ),
+                      )
+                    : Container(
+                        height: 50,
+                        width: 50,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: widget.flag
+                                ? Colors.white
+                                : const Color(0xFF1E1B29)),
+                        child: Icon(
+                          widget.model.icon,
+                          size: 28,
+                          color: widget.flag ? Colors.black : Colors.white,
+                        ),
+                      ),
                 Column(
                   children: [
                     Text(

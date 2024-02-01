@@ -7,8 +7,11 @@ import 'package:iconsax/iconsax.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:smart_home/common/common_color.dart';
 import 'package:smart_home/features/datails/model/model.dart';
+import 'package:smart_home/features/datails/widgets/animation.dart';
+import 'package:smart_home/features/datails/widgets/bounce_animation.dart';
 import 'package:smart_home/features/datails/widgets/custom_cards.dart';
 import 'package:smart_home/features/datails/widgets/custom_paint.dart';
+import 'package:smart_home/features/datails/widgets/fade_animation.dart';
 
 class DetailsScreen extends StatefulWidget {
   const DetailsScreen({
@@ -84,88 +87,93 @@ class _DetailsScreenState extends State<DetailsScreen> {
             const SizedBox(
               height: 80,
             ),
-            Stack(
-              children: [
-                SleekCircularSlider(
-                    appearance: CircularSliderAppearance(
-                        size: 320,
-                        customColors: CustomSliderColors(progressBarColors: [
-                          const Color(0xFF9C7B86),
-                          const Color(0xFF4A86FC),
-                          const Color(0xFF4795EE),
-                          const Color(0xFFF4B0AA)
-                        ]),
-                        animationEnabled: true,
-                        angleRange: 240,
-                        spinnerDuration: Duration.microsecondsPerSecond,
-                        animDurationMultiplier: 2,
-                        customWidths: CustomSliderWidths(
-                            progressBarWidth: 8,
-                            handlerSize: 20,
-                            shadowWidth: 8,
-                            trackWidth: 8)),
-                    onChange: (double val) {
-                      setState(() {
-                        widget.model.value = val;
-                      });
-                      // ignore: avoid_print
-                      // print(widget.model.value);
-                    }),
-                Padding(
-                  padding: const EdgeInsets.only(top: 23, left: 20),
-                  child: Container(
-                    height: 280,
-                    width: 280,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: maincolor,
+            RotateFadeAnimation(
+              delay: 1,
+              child: Stack(
+                children: [
+                  SleekCircularSlider(
+                    initialValue: widget.model.value,
+                      appearance: CircularSliderAppearance(
+                          size: 320,
+                          customColors: CustomSliderColors(progressBarColors: [
+                            const Color(0xFF9C7B86),
+                            const Color(0xFF4A86FC),
+                            const Color(0xFF4795EE),
+                            const Color(0xFFF4B0AA)
+                          ]),
+                          animationEnabled: true,
+                          angleRange: 240,
+                          spinnerDuration: Duration.microsecondsPerSecond,
+                          animDurationMultiplier: 2,
+                          customWidths: CustomSliderWidths(
+                              progressBarWidth: 8,
+                              handlerSize: 20,
+                              shadowWidth: 8,
+                              trackWidth: 8)),
+                      onChange: (double val) {
+                        setState(() {
+                          widget.model.value = val;
+                        });
+                      }),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 23, left: 20),
+                    child: Container(
+                      height: 280,
+                      width: 280,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: maincolor,
+                      ),
+                      child: Center(
+                          child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 100,
+                          ),
+                          Text(
+                            "${widget.model.value.toStringAsFixed(0)} ${widget.model.detail_value}",
+                            style: GoogleFonts.rubik(
+                                fontSize: 50, fontWeight: FontWeight.w600),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            widget.model.detail_value1,
+                            style: GoogleFonts.roboto(
+                                letterSpacing: 1,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey),
+                          ),
+                          Text(
+                            widget.model.detail_value3,
+                            style: GoogleFonts.roboto(
+                                fontSize: 14,
+                                letterSpacing: 1,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey),
+                          ),
+                        ],
+                      )),
                     ),
-                    child: Center(
-                        child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 100,
-                        ),
-                        Text(
-                          "${widget.model.value.toStringAsFixed(0)} ${widget.model.detail_value}",
-                          style: GoogleFonts.rubik(
-                              fontSize: 50, fontWeight: FontWeight.w600),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          widget.model.detail_value1,
-                          style: GoogleFonts.roboto(
-                              letterSpacing: 1,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.grey),
-                        ),
-                        Text(
-                          widget.model.detail_value3,
-                          style: GoogleFonts.roboto(
-                              fontSize: 14,
-                              letterSpacing: 1,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.grey),
-                        ),
-                      ],
-                    )),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             const SizedBox(
               height: 30,
             ),
-            Text(
-              widget.model.detail_mode,
-              style: GoogleFonts.roboto(
-                  fontSize: 14,
-                  letterSpacing: 1,
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w400),
+            BounceFromBottomAnimation(
+              delay: 2,
+              child: Text(
+                widget.model.detail_mode,
+                style: GoogleFonts.roboto(
+                    fontSize: 14,
+                    letterSpacing: 1,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w400),
+              ),
             ),
             const SizedBox(
               height: 10,
@@ -184,37 +192,46 @@ class _DetailsScreenState extends State<DetailsScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedMode = Mode.cold;
-                    });
-                  },
-                  child: CustomCardView(
-                    selectedMode: selectedMode == Mode.cold,
-                    model: widget.model.model1,
+                ScaleFadeBounceAnimation(
+                  delay: 0.5,
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedMode = Mode.cold;
+                      });
+                    },
+                    child: CustomCardView(
+                      selectedMode: selectedMode == Mode.cold,
+                      model: widget.model.model1,
+                    ),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedMode = Mode.fan;
-                    });
-                  },
-                  child: CustomCardView(
-                    selectedMode: selectedMode == Mode.fan,
-                    model: widget.model.model2,
+                ScaleFadeBounceAnimation(
+                  delay: 1.5,
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedMode = Mode.fan;
+                      });
+                    },
+                    child: CustomCardView(
+                      selectedMode: selectedMode == Mode.fan,
+                      model: widget.model.model2,
+                    ),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedMode = Mode.dry;
-                    });
-                  },
-                  child: CustomCardView(
-                    selectedMode: selectedMode == Mode.dry,
-                    model: widget.model.model3,
+                ScaleFadeBounceAnimation(
+                  delay: 2.5,
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedMode = Mode.dry;
+                      });
+                    },
+                    child: CustomCardView(
+                      selectedMode: selectedMode == Mode.dry,
+                      model: widget.model.model3,
+                    ),
                   ),
                 ),
               ],
@@ -222,19 +239,29 @@ class _DetailsScreenState extends State<DetailsScreen> {
             const SizedBox(
               height: 20,
             ),
-            Container(
-              height: 70,
-              width: 70,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [Colors.blue, Colors.tealAccent]),
-              ),
-              child: const Icon(
-                CupertinoIcons.power,
-                size: 35,
+            RotateFadeAnimation(
+              delay: 2,
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    widget.model.value = 0;
+                  });
+                },
+                child: Container(
+                  height: 70,
+                  width: 70,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [Colors.blue, Colors.tealAccent]),
+                  ),
+                  child: const Icon(
+                    CupertinoIcons.power,
+                    size: 35,
+                  ),
+                ),
               ),
             ),
           ],
