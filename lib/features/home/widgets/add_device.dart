@@ -15,11 +15,11 @@ Widget addDevice() {
             Text(
               "Hello Hoe Rang 👋",
               style:
-                  GoogleFonts.roboto(fontSize: 25, fontWeight: FontWeight.bold),
+                  GoogleFonts.rubik(fontSize: 25, fontWeight: FontWeight.bold),
             ),
             Text(
               "Welcome back at home",
-              style: GoogleFonts.roboto(
+              style: GoogleFonts.rubik(
                 fontSize: 15,
                 color: Colors.grey.shade400,
               ),
@@ -36,7 +36,7 @@ Widget addDevice() {
               children: [
                 Text(
                   "Add Device  ",
-                  style: GoogleFonts.roboto(fontSize: 20, color: Colors.grey),
+                  style: GoogleFonts.rubik(fontSize: 20, color: Colors.grey),
                 ),
                 const Icon(
                   Iconsax.add_circle,

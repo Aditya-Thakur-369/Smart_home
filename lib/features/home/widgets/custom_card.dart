@@ -2,7 +2,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:smart_home/common/common_color.dart';
 import 'package:smart_home/features/home/model/model.dart';
 
@@ -62,13 +61,13 @@ class _CustomCardViewState extends State<CustomCardView> {
                 Column(
                   children: [
                     Text(
-                      widget.model.value,
-                      style: GoogleFonts.roboto(
+                      "${widget.model.model.value.toStringAsFixed(0)} ${widget.model.value}",
+                      style: GoogleFonts.rubik(
                           fontSize: 26, fontWeight: FontWeight.bold),
                     ),
                     Text(
                       widget.model.desc,
-                      style: GoogleFonts.roboto(
+                      style: GoogleFonts.rubik(
                           fontSize: 10,
                           fontWeight: FontWeight.w400,
                           letterSpacing: 1,

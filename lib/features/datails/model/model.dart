@@ -22,7 +22,7 @@ class CustompageModel {
   final CustomModel model1;
   final CustomModel model2;
   final CustomModel model3;
-  final double value;
+   double value;
   CustompageModel( {
     required this.detail_name,
     required this.detail_value,

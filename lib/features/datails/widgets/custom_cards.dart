@@ -7,8 +7,10 @@ class CustomCardView extends StatefulWidget {
   const CustomCardView({
     super.key,
     required this.model,
+    required this.selectedMode,
   });
   final CustomModel model;
+  final bool selectedMode;
   // final Function(bool value) onpress;
 
   @override
@@ -38,7 +40,7 @@ class _CustomCardViewState extends State<CustomCardView> {
       width: 120,
       decoration: BoxDecoration(
         color: maincolor,
-        gradient: widget.model.flag
+        gradient: widget.selectedMode
             ? const LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -71,11 +73,11 @@ class _CustomCardViewState extends State<CustomCardView> {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   widget.model.value,
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.rubik(
                       letterSpacing: 1,
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
-                      color: widget.model.flag ? Colors.black : Colors.white),
+                      color: widget.selectedMode ? Colors.black : Colors.white),
                 ),
               ),
             ),

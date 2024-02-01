@@ -22,9 +22,10 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
+  Mode selectedMode = Mode.cold;
+
   @override
   Widget build(BuildContext context) {
-    double value = widget.model.value;
     return Scaffold(
       body: CustomPaint(
         painter: MasterPainter1(),
@@ -52,7 +53,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   Text(
                     // "Air Conditioner",
                     widget.model.detail_name,
-                    style: GoogleFonts.roboto(
+                    style: GoogleFonts.rubik(
                         fontSize: 22, fontWeight: FontWeight.bold),
                   ),
                   IconButton(
@@ -65,7 +66,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
               children: [
                 Text(
                   "Working Space",
-                  style: GoogleFonts.roboto(
+                  style: GoogleFonts.rubik(
                       fontSize: 12,
                       letterSpacing: 1,
                       color: Colors.grey,
@@ -105,9 +106,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             trackWidth: 8)),
                     onChange: (double val) {
                       setState(() {
-                        value = val;
+                        widget.model.value = val;
                       });
-                        print(value);
+                      // ignore: avoid_print
+                      // print(widget.model.value);
                     }),
                 Padding(
                   padding: const EdgeInsets.only(top: 23, left: 20),
@@ -125,9 +127,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           height: 100,
                         ),
                         Text(
-                          "${widget.model.value}",
-                          style: GoogleFonts.aboreto(
-                              fontSize: 50, fontWeight: FontWeight.bold),
+                          "${widget.model.value.toStringAsFixed(0)} ${widget.model.detail_value}",
+                          style: GoogleFonts.rubik(
+                              fontSize: 50, fontWeight: FontWeight.w600),
                         ),
                         const SizedBox(
                           height: 20,
@@ -170,7 +172,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             ),
             Text(
               widget.model.detail_modename,
-              style: GoogleFonts.roboto(
+              style: GoogleFonts.rubik(
                   fontSize: 20,
                   letterSpacing: 1,
                   color: Colors.white,
@@ -180,29 +182,45 @@ class _DetailsScreenState extends State<DetailsScreen> {
               height: 20,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                const SizedBox(
-                  width: 20,
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selectedMode = Mode.cold;
+                    });
+                  },
+                  child: CustomCardView(
+                    selectedMode: selectedMode == Mode.cold,
+                    model: widget.model.model1,
+                  ),
                 ),
-                CustomCardView(
-                  model: widget.model.model1,
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selectedMode = Mode.fan;
+                    });
+                  },
+                  child: CustomCardView(
+                    selectedMode: selectedMode == Mode.fan,
+                    model: widget.model.model2,
+                  ),
                 ),
-                const SizedBox(
-                  width: 20,
-                ),
-                CustomCardView(
-                  model: widget.model.model2,
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                CustomCardView(
-                  model: widget.model.model3,
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selectedMode = Mode.dry;
+                    });
+                  },
+                  child: CustomCardView(
+                    selectedMode: selectedMode == Mode.dry,
+                    model: widget.model.model3,
+                  ),
                 ),
               ],
             ),
             const SizedBox(
-              height: 30,
+              height: 20,
             ),
             Container(
               height: 70,
@@ -224,4 +242,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
       ),
     );
   }
+}
+
+enum Mode {
+  cold,
+  fan,
+  dry,
 }
