@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -25,6 +26,7 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
+  bool flag = false;
   Mode selectedMode = Mode.cold;
 
   @override
@@ -41,27 +43,33 @@ class _DetailsScreenState extends State<DetailsScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(right: 12, left: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                      onPressed: () {
-                        // GoRouter.of(context).push(Routes.homescreen.path);
-                        context.pop();
-                      },
-                      icon: const Icon(
-                        Icons.arrow_back_ios,
-                        size: 30,
-                      )),
-                  Text(
-                    // "Air Conditioner",
-                    widget.model.detail_name,
-                    style: GoogleFonts.rubik(
-                        fontSize: 22, fontWeight: FontWeight.bold),
-                  ),
-                  IconButton(
-                      onPressed: () {}, icon: const Icon(Iconsax.setting)),
-                ],
+              child: BounceFromBottomAnimation(
+                delay: 2,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          // GoRouter.of(context).push(Routes.homescreen.path);
+                          context.pop();
+                        },
+                        icon: const Icon(
+                          Icons.arrow_back_ios,
+                          size: 30,
+                        )),
+                    Text(
+                      // "Air Conditioner",
+                      widget.model.detail_name,
+                      style: GoogleFonts.rubik(
+                          fontSize: 22, fontWeight: FontWeight.bold),
+                    ),
+                    RotateFadeAnimation(
+                      delay: 2,
+                      child: IconButton(
+                          onPressed: () {}, icon: const Icon(Iconsax.setting)),
+                    ),
+                  ],
+                ),
               ),
             ),
             Row(
@@ -87,79 +95,76 @@ class _DetailsScreenState extends State<DetailsScreen> {
             const SizedBox(
               height: 80,
             ),
-            RotateFadeAnimation(
-              delay: 1,
-              child: Stack(
-                children: [
-                  SleekCircularSlider(
+            Stack(
+              children: [
+                SleekCircularSlider(
                     initialValue: widget.model.value,
-                      appearance: CircularSliderAppearance(
-                          size: 320,
-                          customColors: CustomSliderColors(progressBarColors: [
-                            const Color(0xFF9C7B86),
-                            const Color(0xFF4A86FC),
-                            const Color(0xFF4795EE),
-                            const Color(0xFFF4B0AA)
-                          ]),
-                          animationEnabled: true,
-                          angleRange: 240,
-                          spinnerDuration: Duration.microsecondsPerSecond,
-                          animDurationMultiplier: 2,
-                          customWidths: CustomSliderWidths(
-                              progressBarWidth: 8,
-                              handlerSize: 20,
-                              shadowWidth: 8,
-                              trackWidth: 8)),
-                      onChange: (double val) {
-                        setState(() {
-                          widget.model.value = val;
-                        });
-                      }),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 23, left: 20),
-                    child: Container(
-                      height: 280,
-                      width: 280,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: maincolor,
-                      ),
-                      child: Center(
-                          child: Column(
-                        children: [
-                          const SizedBox(
-                            height: 100,
-                          ),
-                          Text(
-                            "${widget.model.value.toStringAsFixed(0)} ${widget.model.detail_value}",
-                            style: GoogleFonts.rubik(
-                                fontSize: 50, fontWeight: FontWeight.w600),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            widget.model.detail_value1,
-                            style: GoogleFonts.roboto(
-                                letterSpacing: 1,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.grey),
-                          ),
-                          Text(
-                            widget.model.detail_value3,
-                            style: GoogleFonts.roboto(
-                                fontSize: 14,
-                                letterSpacing: 1,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.grey),
-                          ),
-                        ],
-                      )),
+                    appearance: CircularSliderAppearance(
+                        size: 320,
+                        customColors: CustomSliderColors(progressBarColors: [
+                          const Color(0xFF9C7B86),
+                          const Color(0xFF4A86FC),
+                          const Color(0xFF4795EE),
+                          const Color(0xFFF4B0AA)
+                        ]),
+                        animationEnabled: true,
+                        angleRange: 240,
+                        spinnerDuration: Duration.microsecondsPerSecond,
+                        animDurationMultiplier: 2,
+                        customWidths: CustomSliderWidths(
+                            progressBarWidth: 8,
+                            handlerSize: 20,
+                            shadowWidth: 8,
+                            trackWidth: 8)),
+                    onChange: (double val) {
+                      setState(() {
+                        widget.model.value = val;
+                      });
+                    }),
+                Padding(
+                  padding: const EdgeInsets.only(top: 23, left: 20),
+                  child: Container(
+                    height: 280,
+                    width: 280,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: maincolor,
                     ),
+                    child: Center(
+                        child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 100,
+                        ),
+                        Text(
+                          "${widget.model.value.toStringAsFixed(0)} ${widget.model.detail_value}",
+                          style: GoogleFonts.rubik(
+                              fontSize: 50, fontWeight: FontWeight.w600),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          widget.model.detail_value1,
+                          style: GoogleFonts.roboto(
+                              letterSpacing: 1,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.grey),
+                        ),
+                        Text(
+                          widget.model.detail_value3,
+                          style: GoogleFonts.roboto(
+                              fontSize: 14,
+                              letterSpacing: 1,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.grey),
+                        ),
+                      ],
+                    )),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
             const SizedBox(
               height: 30,
@@ -245,11 +250,18 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 onTap: () {
                   setState(() {
                     widget.model.value = 0;
+                    flag = true;
+                  });
+                  Timer(Duration(milliseconds: 300), () {
+                    setState(() {
+                      flag = false;
+                    });
                   });
                 },
-                child: Container(
-                  height: 70,
-                  width: 70,
+                child: AnimatedContainer(
+                  duration: Duration(milliseconds: 500),
+                  height: flag ? 60 : 70,
+                  width: flag ? 60 : 70,
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     gradient: LinearGradient(
@@ -257,9 +269,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         end: Alignment.bottomCenter,
                         colors: [Colors.blue, Colors.tealAccent]),
                   ),
-                  child: const Icon(
+                  child: Icon(
                     CupertinoIcons.power,
-                    size: 35,
+                    size: flag ? 30 : 35,
                   ),
                 ),
               ),

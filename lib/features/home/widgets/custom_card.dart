@@ -36,7 +36,7 @@ class _CustomCardViewState extends State<CustomCardView> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [Colors.blue, Colors.tealAccent])
-            : null,
+            : null, 
       ),
       child: Padding(
         padding: const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 0),

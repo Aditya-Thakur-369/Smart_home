@@ -23,7 +23,7 @@ class _BounceFromBottomAnimationState extends State<BounceFromBottomAnimation>
       vsync: this,
     );
 
-    final Animation<double> curve =
+    final Animation<double> curve = 
         CurvedAnimation(parent: controller, curve: Curves.easeInOutQuint); // Use a smoother curve
 
     animation = Tween<double>(begin: 100.0, end: 0.0).animate(curve) // Adjust the end value for less bounce

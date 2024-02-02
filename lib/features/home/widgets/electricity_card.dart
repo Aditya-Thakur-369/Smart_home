@@ -8,7 +8,7 @@ Widget electricitycard() {
   return Container(
     height: 100,
     width: 400,
-    decoration: BoxDecoration(
+    decoration: BoxDecoration( 
       color: maincolor,
       borderRadius: BorderRadius.circular(20),
     ),

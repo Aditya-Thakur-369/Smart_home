@@ -16,7 +16,7 @@ class _RotateFadeAnimationState extends State<RotateFadeAnimation>
     with TickerProviderStateMixin {
   late AnimationController controller;
   late Animation<double> animation;
-  late Animation<double> rotateAnimation;
+  late Animation<double> rotateAnimation; 
 
   @override
   void initState() {

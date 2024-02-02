@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:smart_home/common/common_color.dart';
+import 'package:smart_home/features/graph/graph_screen.dart';
 import 'package:smart_home/features/home/homescreen.dart';
 
 class Navigation extends StatefulWidget {
@@ -22,9 +23,7 @@ class _NavigationState extends State<Navigation> {
   ];
   List<Widget> pages = [
     const HomeScreenView(),
-     Center(
-      child: Text("Electricity Graph",style: GoogleFonts.aBeeZee(fontSize: 30,fontWeight: FontWeight.bold),),
-    ),
+    GraphScreen(),
     const Center(
       child: Text("Center"),
     ),

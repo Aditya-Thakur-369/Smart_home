@@ -22,6 +22,7 @@ class HomeScreenView extends StatefulWidget {
 
 class _HomeScreenViewState extends State<HomeScreenView> {
   var model_list = Controller().model_list;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

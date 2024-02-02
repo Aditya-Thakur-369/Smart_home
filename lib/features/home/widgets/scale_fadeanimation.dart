@@ -11,7 +11,7 @@ class ScaleFadeAnimation extends StatefulWidget {
   @override
   // ignore: library_private_types_in_public_api
   _ScaleFadeAnimationState createState() => _ScaleFadeAnimationState();
-}
+} 
 
 class _ScaleFadeAnimationState extends State<ScaleFadeAnimation>
     with TickerProviderStateMixin {

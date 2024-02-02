@@ -13,7 +13,7 @@ class ScaleFadeBounceAnimation extends StatefulWidget {
 class _ScaleFadeBounceAnimationState extends State<ScaleFadeBounceAnimation>
     with TickerProviderStateMixin {
   late AnimationController controller;
-  late Animation<double> scaleAnimation;
+  late Animation<double> scaleAnimation; 
   late Animation<double> fadeAnimation;
 
   @override
@@ -34,7 +34,7 @@ class _ScaleFadeBounceAnimationState extends State<ScaleFadeBounceAnimation>
     fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: controller,
-        curve: Interval(0.5, 1.0, curve: Curves.easeInOut),
+        curve: const Interval(0.5, 1.0, curve: Curves.easeInOut),
       ),
     );
 
